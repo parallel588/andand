@@ -66,9 +66,10 @@ module AndAnd
         ProxyReturningMe.new(self)
       end
     end
-    
-    unless Object.instance_methods.include?('tap')
-      alias :tap :me
+    unless RUBY_DESCRIPTION[/ruby 2.2.2p95/] # hard fix
+      unless Object.instance_methods.include?('tap')
+        alias :tap :me
+      end
     end
     
     # Does not invoke the method or block and returns the receiver.
